@@ -2,6 +2,7 @@ package com.imooc.example.axon.account;
 
 import com.imooc.example.axon.account.command.AccountCreateCommand;
 import com.imooc.example.axon.account.command.AccountDepositCommand;
+import com.imooc.example.axon.account.command.AccountWithdrawCommand;
 import com.imooc.example.axon.account.query.AccountEntity;
 import com.imooc.example.axon.account.query.AccountEntityRepository;
 import io.swagger.annotations.Api;
@@ -45,7 +46,7 @@ public class AccountController {
     @PutMapping("/{accountId}/deposit/{amount}")
     @ApiOperation("depositMoney")
     public CompletableFuture<Object> depositMoney(@PathVariable String accountId, @PathVariable Double amount) {
-        log.info("Request to withdraw {} from account {} ", amount, accountId);
+        log.info("Request to depositMoney {} from account {} ", amount, accountId);
         return commandGateway.send(new AccountDepositCommand(accountId, amount));
     }
 
@@ -53,7 +54,7 @@ public class AccountController {
     @ApiOperation("withdrawMoney")
     public CompletableFuture<Object> withdrawMoney(@PathVariable String accountId, @PathVariable Double amount) {
         log.info("Request to withdraw {} from account {} ", amount, accountId);
-        return commandGateway.send(new AccountDepositCommand(accountId, amount));
+        return commandGateway.send(new AccountWithdrawCommand(accountId, amount));
     }
 
     @GetMapping("/{accountId}")
