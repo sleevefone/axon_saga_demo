@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
 @SpringBootApplication
-
 public class EventSourcingAxonApplication {
 
     public static void main(String[] args) {
