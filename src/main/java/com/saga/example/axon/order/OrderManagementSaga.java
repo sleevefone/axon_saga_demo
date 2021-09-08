@@ -21,7 +21,6 @@ import com.saga.example.axon.customer.event.OrderPayFailedEvent;
 import com.saga.example.axon.order.command.OrderFailCommand;
 import com.saga.example.axon.order.command.OrderFinishCommand;
 import com.saga.example.axon.customer.command.OrderPayCommand;
-import com.imooc.example.axon.order.event.*;
 import com.saga.example.axon.ticket.command.OrderTicketMoveCommand;
 import com.saga.example.axon.ticket.command.OrderTicketPreserveCommand;
 import com.saga.example.axon.ticket.command.OrderTicketUnlockCommand;
@@ -71,9 +70,7 @@ public class OrderManagementSaga {
         this.customerId = event.getCustomerId();
         this.ticketId = event.getTicketId();
         this.amount = event.getAmount();
-
         timeoutToken = eventScheduler.schedule(Instant.now().plusSeconds(60), new OrderPayFailedEvent(this.orderId));
-
         OrderTicketPreserveCommand command = new OrderTicketPreserveCommand(orderId, ticketId, customerId);
         commandBus.dispatch(asCommandMessage(command), LoggingCallback.INSTANCE);
     }

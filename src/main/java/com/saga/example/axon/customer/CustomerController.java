@@ -37,6 +37,12 @@ public class CustomerController {
     @Resource
     private CustomerEntityRepository customerRepository;
 
+    /**
+     * {@link Customer#Customer(CustomerCreateCommand)}
+     * @param name
+     * @param password
+     * @return
+     */
     @PostMapping("")
     @ApiOperation("createCustomer")
     public CompletableFuture<Object> create(@RequestParam String name, @RequestParam String password) {

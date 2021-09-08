@@ -9,6 +9,7 @@ import com.saga.example.axon.ticket.command.OrderTicketPreserveCommand;
 import com.saga.example.axon.ticket.command.OrderTicketUnlockCommand;
 import com.saga.example.axon.ticket.command.TicketCreateCommand;
 import com.saga.example.axon.ticket.event.TicketCreatedEvent;
+import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
