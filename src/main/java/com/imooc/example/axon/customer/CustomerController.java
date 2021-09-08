@@ -6,6 +6,7 @@ import com.imooc.example.axon.customer.command.CustomerDepositCommand;
 import com.imooc.example.axon.customer.query.CustomerEntity;
 import com.imooc.example.axon.customer.query.CustomerEntityRepository;
 import com.imooc.example.axon.customer.query.CustomerId;
+import com.imooc.example.axon.utils.IdUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.axonframework.commandhandling.gateway.CommandGateway;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -42,8 +42,7 @@ public class CustomerController {
     @ApiOperation("createCustomer")
     public CompletableFuture<Object> create(@RequestParam String name, @RequestParam String password) {
         LOG.info("Request to create account for: {}", name);
-        UUID accountId = UUID.randomUUID();
-        CustomerCreateCommand createCustomerCommand = new CustomerCreateCommand(accountId.toString(), name, password);
+        CustomerCreateCommand createCustomerCommand = new CustomerCreateCommand(IdUtils.getUuid(), name, password);
         return commandGateway.send(createCustomerCommand);
     }
 
@@ -69,6 +68,9 @@ public class CustomerController {
         return customerRepository.findOne(accountId);
     }
 
+    /**
+     * 查询的是物化视图，非事件 eventStore
+     */
     @GetMapping("")
     @ApiOperation("getAllCustomers")
     public List<CustomerEntity> getAllCustomers() {
@@ -76,9 +78,12 @@ public class CustomerController {
         return customerRepository.findAll();
     }
 
-    @GetMapping("/query/{customerId}")
-    @ApiOperation("getAggregate_")
-    public Customer getAggregate_(CustomerId customerId) throws ExecutionException, InterruptedException {
+    /**
+     * 仅仅在测试环境中使用如下查询方式（axon 会（聚合）执行所有的 event），查询的是 eventStore
+     */
+    @GetMapping("/query")
+    @ApiOperation("queryOnlyInTestEvn")
+    public Customer queryOnlyInTestEvn(CustomerId customerId) throws ExecutionException, InterruptedException {
         return queryGateway.query(customerId, Customer.class).get();
     }
 }

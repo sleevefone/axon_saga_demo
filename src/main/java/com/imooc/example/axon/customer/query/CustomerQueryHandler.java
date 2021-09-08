@@ -23,7 +23,7 @@ public class CustomerQueryHandler {
         // 这里这样做，只是用于debug，有时候，可能写的代码有问题，导致聚合数据跟视图数据不一致。
         final Customer[] customers = new Customer[1];
         Repository<Customer> customerRepository = axonConfiguration.repository(Customer.class);
-        customerRepository.load(customerId.toString()).execute((Customer customer) -> customers[0] = customer);
+        customerRepository.load(customerId.getIdentifier()).execute((Customer customer) -> customers[0] = customer);
 
         return customers[0];
     }

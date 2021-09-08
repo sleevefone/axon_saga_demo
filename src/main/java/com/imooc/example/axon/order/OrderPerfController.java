@@ -5,6 +5,7 @@ import com.imooc.example.axon.customer.query.CustomerEntityRepository;
 import com.imooc.example.axon.order.command.OrderCreateCommand;
 import com.imooc.example.axon.ticket.query.TicketEntity;
 import com.imooc.example.axon.ticket.query.TicketEntityRepository;
+import com.imooc.example.axon.utils.IdUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.axonframework.commandhandling.callbacks.LoggingCallback;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 /**
@@ -45,8 +45,7 @@ public class OrderPerfController {
     public void oneUserAllTicket(@RequestBody Order order) {
         Random random = new Random();
         TicketEntity buyTicket = this.ticketList.get(random.nextInt(ticketList.size()));
-        UUID orderId = UUID.randomUUID();
-        OrderCreateCommand command = new OrderCreateCommand(orderId.toString(), order.getCustomerId(),
+        OrderCreateCommand command = new OrderCreateCommand(IdUtils.getUuid(), order.getCustomerId(),
                 order.getTitle(), buyTicket.getId(), order.getAmount());
         LOG.info("OneUserAllTicket Create Order:{}", command);
         commandGateway.send(command, LoggingCallback.INSTANCE);
@@ -57,8 +56,7 @@ public class OrderPerfController {
     public void create(@RequestBody Order order) {
         Random random = new Random();
         CustomerEntity customer = this.customerList.get(random.nextInt(customerList.size()));
-        UUID orderId = UUID.randomUUID();
-        OrderCreateCommand command = new OrderCreateCommand(orderId.toString(), customer.getId(),
+        OrderCreateCommand command = new OrderCreateCommand(IdUtils.getUuid(), customer.getId(),
                 order.getTitle(), order.getTicketId(), order.getAmount());
         LOG.info("AllUserOneTicket Create Order:{}", command);
         commandGateway.send(command, LoggingCallback.INSTANCE);

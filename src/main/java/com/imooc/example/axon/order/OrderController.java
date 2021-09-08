@@ -4,6 +4,7 @@ import com.imooc.example.axon.order.command.OrderCreateCommand;
 import com.imooc.example.axon.order.query.OrderEntity;
 import com.imooc.example.axon.order.query.OrderEntityRepository;
 import com.imooc.example.axon.order.query.OrderId;
+import com.imooc.example.axon.utils.IdUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.axonframework.commandhandling.callbacks.LoggingCallback;
@@ -12,7 +13,6 @@ import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -33,8 +33,7 @@ public class OrderController {
     @PostMapping("")
     @ApiOperation("createOrder")
     public void create(@RequestBody Order order) {
-        UUID orderId = UUID.randomUUID();
-        OrderCreateCommand command = new OrderCreateCommand(orderId.toString(), order.getCustomerId(),
+        OrderCreateCommand command = new OrderCreateCommand(IdUtils.getUuid(), order.getCustomerId(),
                 order.getTitle(), order.getTicketId(), order.getAmount());
         commandGateway.send(command, LoggingCallback.INSTANCE);
     }
