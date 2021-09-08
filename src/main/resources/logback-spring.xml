@@ -19,8 +19,8 @@
     <logger name="org.hibernate.SQL" level="${DEBUG_LEVEL}"/>
     <logger name="org.apache.activemq" level="${DEBUG_LEVEL}"/>
 
+    <logger name="org.axonframework.messaging.unitofwork.MessageProcessingContext" level="INFO"/>
     <logger name="org.axonframework" level="${DEBUG_LEVEL}"/>
-    <logger name="org.axonframework.eventhandling.TrackingEventProcessor" level="info"/>
 
 
     <root level="INFO">

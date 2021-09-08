@@ -1,39 +1,43 @@
-# springAxonDemo
-
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
 
 
-#### 安装教程
+## 实例1测试
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 使用说明
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+充值
+ab -n 20 -c 10 -T 'application/json' -m PUT http://localhost:8080/accounts/43e28d0d-8736-4b4a-842a-a99481bd3981/deposit/100
+提现
+ab -n 20 -c 10 -T 'application/json' -m PUT http://localhost:8080/accounts/f55dc8ce-b960-4f20-a9df-04fc72878e06/withdraw/200
 
 
-#### 特技
+## 测试
+1. 创建用户
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+curl -X POST "http://localhost:8080/customers?name=imooc1&password=123456"
+curl -X GET http://localhost:8080/customers
+
+curl -X PUT http://localhost:8080/customers/19c48f1b-338d-49d3-b011-7d11d5189560/deposit/1000
+
+
+2. 创建票：
+
+curl -X POST http://localhost:8080/tickets?name=t1
+
+3. 创建订单
+
+curl -X POST -d '{"customerId": "19c48f1b-338d-49d3-b011-7d11d5189560", "title": "order_1", "ticketId": "6fcf920c-e600-43a8-8467-0acfd5144f88", "amount": 100}' -H 'Content-Type: application/json' http://localhost:8080/orders
+
+超时：
+curl -X POST -d '{"customerId": "f352dae2-3f0c-4298-b01b-7d43b6e885df", "title": "order_timeout", "ticketId": "29bf1d49-4a77-46dd-8ace-2fc469116f3e", "amount": 0}' -H 'Content-Type: application/json' http://localhost:8080/orders
+
+4. 性能测试
+
+充值
+ab -n 20 -c 10 -T 'application/json' -m PUT http://localhost:8080/customers/f55dc8ce-b960-4f20-a9df-04fc72878e06/deposit/100
+提现
+ab -n 20 -c 10 -T 'application/json' -m PUT http://localhost:8080/customers/f55dc8ce-b960-4f20-a9df-04fc72878e06/withdraw/200
+
+curl -X GET http://localhost:8080/orders/tickets
+curl -X GET http://localhost:8080/orders/customers
+
+ab -n 20 -c 10 -T 'application/json' -p oneUserAllTicket.txt http://localhost:8080/orders/test/oneUserAllTicket
+
+ab -n 20 -c 10 -T 'application/json' -p allUserOneTicket.txt http://localhost:8080/orders/test/allUserOneTicket

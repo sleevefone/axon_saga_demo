@@ -3,9 +3,7 @@ package com.imooc.example.axon;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.service.VendorExtension;
@@ -18,21 +16,18 @@ import java.util.ArrayList;
 /**
  * https://blog.csdn.net/qq_40663787/article/details/106333663
  *
+ * https://www.cnblogs.com/xiaoruirui/p/11809795.html
  *
  *
  */
 @Configuration
-@EnableOpenApi
+@EnableSwagger2
 public class SwaggerConfig {
 
 
     @Bean
     public Docket docket1(Environment environment) {
-
-        // 设置了swagger的docket的环境
-        boolean flag = environment.acceptsProfiles(Profiles.of("dev", "test"));
-
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .groupName("HybridGaw1")
                 .enable(true)
@@ -48,7 +43,7 @@ public class SwaggerConfig {
         // 设置了swagger的docket的环境
 //        boolean flag = environment.acceptsProfiles(Profiles.of("dev", "test"));
 
-        return new Docket(DocumentationType.OAS_30)
+        return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .groupName("HybridGaw")
                 .enable(true)
