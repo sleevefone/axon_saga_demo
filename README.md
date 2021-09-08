@@ -50,3 +50,97 @@ ab -n 20 -c 10 -T 'application/json' -p allUserOneTicket.txt http://localhost:80
         return queryGateway.query(customerId, Customer.class).get();
     }
 ```
+
+
+### 备注2: 项目结构
+
+```text
+.
+├── README.md
+├── mvnw
+├── mvnw.cmd
+├── pom.xml
+└── src
+    ├── main
+    │   ├── java
+    │   │   └── com
+    │   │       └── saga
+    │   │           └── example
+    │   │               └── axon
+    │   │                   ├── EventSourcingAxonSagaApplication.java//main 启动类
+    │   │                   ├── SwaggerConfig.java//文档配置类
+    │   │                   ├── config
+    │   │                   │   ├── AxonConfig.java//
+    │   │                   │   └── EventLoggerService.java
+    │   │                   ├── customer
+    │   │                   │   ├── Customer.java//客户领域对象
+    │   │                   │   ├── CustomerController.java//web 操作
+    │   │                   │   ├── command//客户相关的指令
+    │   │                   │   │   ├── CustomerChargeCommand.java//客户支出指令-->CustomerChargedEvent
+    │   │                   │   │   ├── CustomerCreateCommand.java//创建客户指令-->CustomerCreatedEvent
+    │   │                   │   │   ├── CustomerDepositCommand.java//客户存款指令-->CustomerDepositedEvent
+    │   │                   │   │   └── OrderPayCommand.java//客户支付指令-->OrderPaidEvent,OrderPayFailedEvent
+    │   │                   │   ├── event//客户相关的事件，axon负责持久化到数据库（这里是 axon 中读写分离中的写）
+    │   │                   │   │   ├── CustomerChargedEvent.java//支出事件
+    │   │                   │   │   ├── CustomerCreatedEvent.java//客户创建事件
+    │   │                   │   │   ├── CustomerDepositedEvent.java//客户存款事件
+    │   │                   │   │   ├── OrderPaidEvent.java//付款事件
+    │   │                   │   │   └── OrderPayFailedEvent.java//付款失败事件
+    │   │                   │   └── query//物化视图的相关，axon 会持久化到数据库（这里是 axon 中读写分离中的读）
+    │   │                   │       ├── CustomerEntity.java//持久化对象
+    │   │                   │       ├── CustomerEntityRepository.java//Repository
+    │   │                   │       ├── CustomerId.java//客户查询参数
+    │   │                   │       ├── CustomerProjector.java//物化视图相关的事件处理器集合
+    │   │                   │       └── CustomerQueryHandler.java
+    │   │                   ├── order
+    │   │                   │   ├── Order.java
+    │   │                   │   ├── OrderController.java
+    │   │                   │   ├── OrderManagementSaga.java
+    │   │                   │   ├── OrderPerfController.java
+    │   │                   │   ├── command
+    │   │                   │   │   ├── OrderCreateCommand.java
+    │   │                   │   │   ├── OrderFailCommand.java
+    │   │                   │   │   └── OrderFinishCommand.java
+    │   │                   │   ├── event
+    │   │                   │   │   ├── OrderCreatedEvent.java
+    │   │                   │   │   ├── OrderFailedEvent.java
+    │   │                   │   │   └── OrderFinishedEvent.java
+    │   │                   │   └── query
+    │   │                   │       ├── OrderEntity.java
+    │   │                   │       ├── OrderEntityRepository.java
+    │   │                   │       ├── OrderId.java
+    │   │                   │       ├── OrderProjector.java
+    │   │                   │       └── OrderQueryHandler.java
+    │   │                   ├── ticket
+    │   │                   │   ├── Ticket.java
+    │   │                   │   ├── TicketController.java
+    │   │                   │   ├── command
+    │   │                   │   │   ├── OrderTicketMoveCommand.java
+    │   │                   │   │   ├── OrderTicketPreserveCommand.java
+    │   │                   │   │   ├── OrderTicketUnlockCommand.java
+    │   │                   │   │   └── TicketCreateCommand.java
+    │   │                   │   ├── event
+    │   │                   │   │   ├── OrderTicketMovedEvent.java
+    │   │                   │   │   ├── OrderTicketPreserveFailedEvent.java
+    │   │                   │   │   ├── OrderTicketPreservedEvent.java
+    │   │                   │   │   ├── OrderTicketUnlockedEvent.java
+    │   │                   │   │   └── TicketCreatedEvent.java
+    │   │                   │   └── query
+    │   │                   │       ├── TicketEntity.java
+    │   │                   │       ├── TicketEntityRepository.java
+    │   │                   │       └── TicketProjector.java
+    │   │                   └── utils
+    │   │                       └── IdUtils.java
+    │   └── resources
+    │       ├── application.properties
+    │       └── logback-spring.xml
+    └── test
+        ├── java
+        │   └── com
+        │       └── imooc
+        │           └── example
+        │               └── axon
+        │                   ├── EventSourcingAxonApplicationTests.java
+        │                   └── Test1.java
+        └── test4.iml
+```
