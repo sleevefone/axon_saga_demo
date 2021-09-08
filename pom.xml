@@ -13,6 +13,14 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>axon</name>
     <description>An Axon Framework Sample Application</description>
+
+
+    <properties>
+        <java.version>1.8</java.version>
+        <axon.version>4.5.3</axon.version>
+    </properties>
+
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.axonframework/axon-spring-boot-starter -->
         <dependency>
@@ -20,13 +28,13 @@
             <artifactId>axon-spring-boot-starter</artifactId>
             <version>4.5.3</version>
 
-            <exclusions>
-                <!--不适用 axonServer 做事件存储服务时，移除connector依赖-->
-                <exclusion>
-                    <groupId>org.axonframework</groupId>
-                    <artifactId>axon-server-connector</artifactId>
-                </exclusion>
-            </exclusions>
+<!--            <exclusions>-->
+<!--                &lt;!&ndash;不适用 axonServer 做事件存储服务时，移除connector依赖&ndash;&gt;-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.axonframework</groupId>-->
+<!--                    <artifactId>axon-server-connector</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,10 +88,7 @@
 
 
     </dependencies>
-    <properties>
-        <java.version>1.8</java.version>
-        <axon.version>4.5.3</axon.version>
-    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
