@@ -10,13 +10,13 @@ import com.saga.example.axon.customer.command.OrderPayCommand;
 import com.saga.example.axon.customer.event.OrderPaidEvent;
 import com.saga.example.axon.customer.event.OrderPayFailedEvent;
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
+import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
+import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 /**
  * Created by mavlarn on 2018/5/24.

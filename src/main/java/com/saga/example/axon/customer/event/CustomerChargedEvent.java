@@ -8,7 +8,8 @@ import lombok.NoArgsConstructor;
 /**
  * Created by mavlarn on 2018/5/22.
  */
-@Data@NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class CustomerChargedEvent {
 

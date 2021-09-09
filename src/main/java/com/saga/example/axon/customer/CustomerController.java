@@ -13,6 +13,7 @@ import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -35,7 +36,7 @@ public class CustomerController {
     @Resource
     private QueryGateway queryGateway;
     @Resource
-    private CustomerEntityRepository customerRepository;
+    private CustomerEntityRepository customerEntityRepository;
 
     /**
      * {@link Customer#Customer(CustomerCreateCommand)}
@@ -70,7 +71,9 @@ public class CustomerController {
     @ApiOperation("getCustomerById")
     public CustomerEntity getCustomerById(@PathVariable String accountId) {
         LOG.info("Request Customer with id: {}", accountId);
-        return customerRepository.findOne(accountId);
+        CustomerEntity ce = new CustomerEntity();
+        ce.setId(accountId);
+        return customerEntityRepository.findOne(Example.of(ce)).orElseGet(null);
     }
 
     /**
@@ -80,7 +83,7 @@ public class CustomerController {
     @ApiOperation("getAllCustomers")
     public List<CustomerEntity> getAllCustomers() {
         LOG.info("Request all Customers");
-        return customerRepository.findAll();
+        return customerEntityRepository.findAll();
     }
 
     /**

@@ -5,7 +5,10 @@ import com.saga.example.axon.order.event.OrderFailedEvent;
 import com.saga.example.axon.order.event.OrderFinishedEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 /**
  * Created by mavlarn on 2018/5/22.
@@ -31,16 +34,30 @@ public class OrderProjector {
 
     @EventHandler
     public void on(OrderFinishedEvent event) {
-        OrderEntity order = repository.findOne(event.getOrderId());
-        order.setStatus("FINISH");
-        repository.save(order);
+        OrderEntity oe = new OrderEntity();
+        oe.setId(event.getOrderId());
+        Optional<OrderEntity> order = repository.findOne(Example.of(oe));
+        order.ifPresent(o->{
+            o.setStatus("FINISH");
+            repository.save(o);
+
+        });
+//        OrderEntity order = repository.findOne(event.getOrderId());
+//        order.setStatus("FINISH");
+//        repository.save(order);
     }
 
     @EventHandler
     public void on(OrderFailedEvent event) {
-        OrderEntity order = repository.findOne(event.getOrderId());
-        order.setStatus("FAILED");
-        order.setReason(event.getReason());
-        repository.save(order);
+        OrderEntity oe = new OrderEntity();
+        oe.setId(event.getOrderId());
+        Optional<OrderEntity> order = repository.findOne(Example.of(oe));
+        order.ifPresent(o->{
+            o.setStatus("FAILED");
+            o.setReason(event.getReason());
+            repository.save(o);
+
+        });
+
     }
 }

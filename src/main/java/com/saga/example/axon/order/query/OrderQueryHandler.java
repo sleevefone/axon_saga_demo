@@ -1,7 +1,8 @@
 package com.saga.example.axon.order.query;
 
 import com.saga.example.axon.order.Order;
-import org.axonframework.commandhandling.model.Repository;
+import org.axonframework.modelling.command.Repository;
+import org.axonframework.modelling.command.Repository;
 import org.axonframework.queryhandling.QueryHandler;
 import org.axonframework.spring.config.AxonConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;

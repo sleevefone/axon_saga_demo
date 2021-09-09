@@ -1,5 +1,9 @@
 package com.saga.example.axon.customer.query;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +12,9 @@ import javax.persistence.Id;
  * Created by mavlarn on 2018/1/20.
  */
 @Entity(name = "tb_customer")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerEntity {
 
     @Id
@@ -19,16 +26,6 @@ public class CustomerEntity {
     private String password;
 
     private Double deposit;
-
-    public CustomerEntity() {
-    }
-
-    public CustomerEntity(String id, String username, String password, Double deposit) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.deposit = deposit;
-    }
 
     public String getId() {
         return id;

@@ -11,6 +11,7 @@ import org.axonframework.commandhandling.callbacks.LoggingCallback;
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.queryhandling.QueryGateway;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.ExecutionException;
@@ -46,6 +47,8 @@ public class OrderController {
     @ApiOperation("getViewById")
     @GetMapping("/{orderId}")
     public OrderEntity getView(@PathVariable String orderId) {
-        return orderEntityRepository.findOne(orderId);
+        OrderEntity oe = new OrderEntity();
+        oe.setId(orderId);
+        return orderEntityRepository.findOne(Example.of(oe)).orElseGet(null);
     }
 }

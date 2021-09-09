@@ -1,6 +1,6 @@
 package com.saga.example.axon.customer.command;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import javax.validation.constraints.Min;
 

@@ -1,11 +1,19 @@
 package com.saga.example.axon.ticket.query;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
  * 使用JPA的entity作为aggregate，文档中没有说明要加@Aggregate，实际上不加的话会出错。
  */
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity(name = "tb_ticket")
 public class TicketEntity {
 

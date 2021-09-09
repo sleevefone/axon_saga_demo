@@ -11,13 +11,13 @@ import com.saga.example.axon.ticket.command.TicketCreateCommand;
 import com.saga.example.axon.ticket.event.TicketCreatedEvent;
 import lombok.NoArgsConstructor;
 import org.axonframework.commandhandling.CommandHandler;
-import org.axonframework.commandhandling.model.AggregateIdentifier;
+import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
+import static org.axonframework.modelling.command.AggregateLifecycle.apply;
 
 @Aggregate
 public class Ticket {

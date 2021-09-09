@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 /**
  * Created by mavlarn on 2018/5/27.
  */
-@Data@NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderPaidEvent {
 

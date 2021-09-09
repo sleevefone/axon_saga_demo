@@ -33,6 +33,11 @@ public class AxonConfig {
 
     @Bean
     public EventScheduler eventScheduler(EventBus eventBus, TransactionManager transactionManager) {
-        return new SimpleEventScheduler(Executors.newScheduledThreadPool(1), eventBus, transactionManager);
+        return SimpleEventScheduler.builder()
+                .eventBus(eventBus)
+                .transactionManager(transactionManager)
+                .scheduledExecutorService(Executors.newScheduledThreadPool(1))
+                .build();
+//        return new SimpleEventScheduler(Executors.newScheduledThreadPool(1), eventBus, transactionManager);
     }
 }

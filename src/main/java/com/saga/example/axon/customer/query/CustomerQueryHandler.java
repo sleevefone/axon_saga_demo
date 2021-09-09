@@ -1,11 +1,13 @@
 package com.saga.example.axon.customer.query;
 
 import com.saga.example.axon.customer.Customer;
-import org.axonframework.commandhandling.model.Repository;
+import org.axonframework.modelling.command.Repository;
 import org.axonframework.queryhandling.QueryHandler;
 import org.axonframework.spring.config.AxonConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * Created by mavlarn on 2018/5/29.
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class CustomerQueryHandler {
 
 
-    @Autowired
+    @Resource
     AxonConfiguration axonConfiguration;
 
     @QueryHandler

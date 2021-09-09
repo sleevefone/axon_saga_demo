@@ -1,6 +1,6 @@
 package com.saga.example.axon.ticket.command;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
+import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 /**
  * Created by mavlarn on 2018/5/26.
