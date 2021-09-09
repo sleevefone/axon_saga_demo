@@ -9,7 +9,8 @@ import java.time.ZonedDateTime;
 /**
  * Created by mavlarn on 2018/5/24.
  */
-@Data@NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class OrderCreatedEvent {
 

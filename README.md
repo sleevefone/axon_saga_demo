@@ -14,7 +14,7 @@ curl -X POST "http://localhost:8080/tickets?name=t1"
 
 ### 3. 创建订单
 ```text
-curl -X POST -d '{"customerId": "c6cc68f6527b48449072320cb80c1f5c", "title": "order_1", "ticketId": "59df4212be2f473d8e3eaeacbb86a590", "amount": 100}' -H 'Content-Type: application/json' http://localhost:8080/orders
+curl -X POST -d '{"customerId": "943638870e664682b949e9a2a5f23a1f", "title": "order_1", "ticketId": "82bcbcfe8eac47beba2b89ece30fd096", "amount": 100}' -H 'Content-Type: application/json' http://localhost:8080/orders
 超时：
 curl -X POST -d '{"customerId": "f352dae2-3f0c-4298-b01b-7d43b6e885df", "title": "order_timeout", "ticketId": "29bf1d49-4a77-46dd-8ace-2fc469116f3e", "amount": 0}' -H 'Content-Type: application/json' http://localhost:8080/orders
 ```

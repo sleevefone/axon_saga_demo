@@ -47,7 +47,7 @@ public class OrderPerfController {
         OrderCreateCommand command = new OrderCreateCommand(IdUtils.getUuid(), order.getCustomerId(),
                 order.getTitle(), buyTicket.getId(), order.getAmount());
         LOG.info("OneUserAllTicket Create Order:{}", command);
-        commandGateway.send(command, LoggingCallback.INSTANCE);
+        commandGateway.sendAndWait(command);
     }
 
     @PostMapping("/test/allUserOneTicket")

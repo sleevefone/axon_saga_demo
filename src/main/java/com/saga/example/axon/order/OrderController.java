@@ -37,6 +37,7 @@ public class OrderController {
         OrderCreateCommand command = new OrderCreateCommand(IdUtils.getUuid(), order.getCustomerId(),
                 order.getTitle(), order.getTicketId(), order.getAmount());
         commandGateway.send(command, LoggingCallback.INSTANCE);
+
     }
 
     @GetMapping("/query/{orderId}")
