@@ -22,6 +22,15 @@
     <logger name="org.axonframework.messaging.unitofwork.MessageProcessingContext" level="INFO"/>
     <logger name="org.axonframework" level="${DEBUG_LEVEL}"/>
 
+    <turboFilter class="ch.qos.logback.classic.turbo.DynamicThresholdFilter">
+        <Key>mdc_key</Key>
+        <!-- You can set default threshold as you like -->
+        <DefaultThreshold>TRACE</DefaultThreshold>
+        <MDCValueLevelPair>
+            <value>hello</value>
+            <level>ERROR</level>
+        </MDCValueLevelPair>
+    </turboFilter>
 
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
