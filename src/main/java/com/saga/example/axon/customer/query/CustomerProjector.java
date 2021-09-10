@@ -4,6 +4,8 @@ import com.saga.example.axon.customer.event.CustomerChargedEvent;
 import com.saga.example.axon.customer.event.CustomerCreatedEvent;
 import com.saga.example.axon.customer.event.CustomerDepositedEvent;
 import com.saga.example.axon.customer.event.OrderPaidEvent;
+import org.axonframework.config.ProcessingGroup;
+import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
  * Created by mavlarn on 2018/5/22.
  */
 @Service
+@ProcessingGroup("customerProjector")
+@AllowReplay
 public class CustomerProjector {
 
     @Autowired

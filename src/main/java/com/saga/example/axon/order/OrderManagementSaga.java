@@ -32,6 +32,7 @@ import com.saga.example.axon.order.event.OrderFailedEvent;
 import com.saga.example.axon.order.event.OrderFinishedEvent;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.callbacks.LoggingCallback;
+import org.axonframework.eventhandling.AllowReplay;
 import org.axonframework.eventhandling.scheduling.EventScheduler;
 import org.axonframework.eventhandling.scheduling.ScheduleToken;
 import org.axonframework.modelling.saga.EndSaga;
@@ -47,6 +48,7 @@ import java.time.Instant;
 import static org.axonframework.commandhandling.GenericCommandMessage.asCommandMessage;
 
 @Saga
+//@AllowReplay
 public class OrderManagementSaga {
 
     private static final Logger LOG = LoggerFactory.getLogger(OrderManagementSaga.class);
