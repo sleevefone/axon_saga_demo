@@ -47,22 +47,23 @@ public class CustomerProjector {
     public void on(CustomerChargedEvent event) {
 
         Aggregate<CustomerEntity> one = axonRepository.load(event.getCustomerId());
-        one.execute(o->{
+        one.execute(o -> {
             Double newDeposit = o.getDeposit() - event.getAmount();
             o.setDeposit(newDeposit);
             jpaCustomerEntityRepository.save(o);
 
         });
 
-        jpaCustomerEntityRepository.findOne(Example.of(CustomerEntity.builder()
+        Example<CustomerEntity> ex = Example.of(CustomerEntity.builder()
                 .id(event.getCustomerId())
-                .build()
-        )).ifPresent(o -> {
-            Double newDeposit = o.getDeposit() - event.getAmount();
-            o.setDeposit(newDeposit);
-            jpaCustomerEntityRepository.save(o);
+                .build());
+        jpaCustomerEntityRepository.findOne(ex)
+                .ifPresent(o -> {
+                    Double newDeposit = o.getDeposit() - event.getAmount();
+                    o.setDeposit(newDeposit);
+                    jpaCustomerEntityRepository.save(o);
 
-        });
+                });
 
     }
 
