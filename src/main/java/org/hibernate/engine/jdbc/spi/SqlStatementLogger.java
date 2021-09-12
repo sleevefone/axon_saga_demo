@@ -74,7 +74,7 @@ public class SqlStatementLogger {
         this.logToStdout = logToStdout;
         this.format = format;
         this.highlight = highlight;
-        this.logSlowQuery = logSlowQuery;
+        this.logSlowQuery = 2;
     }
 
     /**

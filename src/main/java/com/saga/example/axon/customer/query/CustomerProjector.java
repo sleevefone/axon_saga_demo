@@ -24,8 +24,8 @@ public class CustomerProjector {
     @Autowired
     private CustomerEntityRepository jpaCustomerEntityRepository;
 
-    @Resource
-    private org.axonframework.modelling.command.Repository<CustomerEntity> axonRepository;
+//    @Resource
+//    private org.axonframework.modelling.command.Repository<CustomerEntity> axonRepository;
 
     @EventHandler
     public void on(CustomerCreatedEvent event) {
@@ -46,13 +46,13 @@ public class CustomerProjector {
     @EventHandler
     public void on(CustomerChargedEvent event) {
 
-        Aggregate<CustomerEntity> one = axonRepository.load(event.getCustomerId());
-        one.execute(o -> {
-            Double newDeposit = o.getDeposit() - event.getAmount();
-            o.setDeposit(newDeposit);
-            jpaCustomerEntityRepository.save(o);
-
-        });
+//        Aggregate<CustomerEntity> one = axonRepository.load(event.getCustomerId());
+//        one.execute(o -> {
+//            Double newDeposit = o.getDeposit() - event.getAmount();
+//            o.setDeposit(newDeposit);
+//            jpaCustomerEntityRepository.save(o);
+//
+//        });
 
         Example<CustomerEntity> ex = Example.of(CustomerEntity.builder()
                 .id(event.getCustomerId())

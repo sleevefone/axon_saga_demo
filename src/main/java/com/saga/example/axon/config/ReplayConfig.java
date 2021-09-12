@@ -8,11 +8,14 @@ import org.axonframework.eventhandling.pooled.PooledStreamingEventProcessor;
 import org.axonframework.messaging.StreamableMessageSource;
 
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 
 /**
  * @author fanhb on 2021/9/10
- * @desc xxxx
  */
 public class ReplayConfig implements EventProcessingConfigurer.PooledStreamingProcessorConfiguration {
     @Override
@@ -20,19 +23,23 @@ public class ReplayConfig implements EventProcessingConfigurer.PooledStreamingPr
     public PooledStreamingEventProcessor.Builder apply(Configuration config, PooledStreamingEventProcessor.Builder builder) {
 
         return builder.initialToken(new Function<StreamableMessageSource<TrackedEventMessage<?>>, TrackingToken>() {
-                    @Override
-                    public TrackingToken apply(StreamableMessageSource<TrackedEventMessage<?>> messageSource) {
+                                        @Override
+                                        public TrackingToken apply(StreamableMessageSource<TrackedEventMessage<?>> messageSource) {
 
-                        //                            messageSource.openStream()
+                                            //                            messageSource.openStream()
 //                                        messageSource.
-                        TrackingToken tokenSince = messageSource.createTokenSince(Duration.ofDays(31));
-                        //                            messageSource.openStream()
-                        return tokenSince;
-                    }
-                }
+//                                            Instant instant = LocalDateTime.parse("20210101 00:00:00", DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")).toInstant(ZoneOffset.UTC);
+                                            TrackingToken tokenSince = messageSource.createTokenSince(Duration.ofDays(31));
+//                                                                        messageSource.openStream()
+
+//                                            messageSource.createHeadToken();
+//                                            return messageSource.createTokenAt(instant);
+                                            return tokenSince;
+                                        }
+                                    }
         );
     }
-};
+}
 
 
 

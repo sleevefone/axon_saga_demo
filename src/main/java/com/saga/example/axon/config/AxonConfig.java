@@ -60,22 +60,22 @@ public class AxonConfig {
         processingConfigurer.registerPooledStreamingEventProcessorConfiguration("customerProjector", psepConfig);
     }
 
-    @Autowired
-    public void configureInitialTrackingToken2(EventProcessingConfigurer processingConfigurer) {
-        TrackingEventProcessorConfiguration tepConfig =
-                TrackingEventProcessorConfiguration.forSingleThreadedProcessing()
-                        .andInitialTrackingToken(StreamableMessageSource::createTailToken);
-
-        processingConfigurer.registerTrackingEventProcessorConfiguration("my-processor", config -> tepConfig);
-    }
-
-    @Autowired
-    public void configureTokenClaimValues(EventProcessingConfigurer processingConfigurer) {
-        TrackingEventProcessorConfiguration tepConfig = TrackingEventProcessorConfiguration.forSingleThreadedProcessing()
-                        .andTokenClaimInterval(1000, TimeUnit.MILLISECONDS)
-                        .andEventAvailabilityTimeout(2000, TimeUnit.MILLISECONDS);
-
-        processingConfigurer.registerTrackingEventProcessorConfiguration("my-processor", config -> tepConfig);
-    }
+//    @Autowired
+//    public void configureInitialTrackingToken2(EventProcessingConfigurer processingConfigurer) {
+//        TrackingEventProcessorConfiguration tepConfig =
+//                TrackingEventProcessorConfiguration.forSingleThreadedProcessing()
+//                        .andInitialTrackingToken(StreamableMessageSource::createTailToken);
+//
+//        processingConfigurer.registerTrackingEventProcessorConfiguration("my-processor", config -> tepConfig);
+//    }
+//
+//    @Autowired
+//    public void configureTokenClaimValues(EventProcessingConfigurer processingConfigurer) {
+//        TrackingEventProcessorConfiguration tepConfig = TrackingEventProcessorConfiguration.forSingleThreadedProcessing()
+//                        .andTokenClaimInterval(1000, TimeUnit.MILLISECONDS)
+//                        .andEventAvailabilityTimeout(2000, TimeUnit.MILLISECONDS);
+//
+//        processingConfigurer.registerTrackingEventProcessorConfiguration("my-processor", config -> tepConfig);
+//    }
 
 }
