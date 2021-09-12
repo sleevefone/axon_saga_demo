@@ -32,10 +32,10 @@
             <artifactId>axon-spring-boot-starter</artifactId>
             <version>${axon.verion}</version>
             <!--<exclusions>-->
-                <!--<exclusion>-->
-                    <!--<groupId>org.axonframework</groupId>-->
-                    <!--<artifactId>axon-server-connector</artifactId>-->
-                <!--</exclusion>-->
+            <!--<exclusion>-->
+            <!--<groupId>org.axonframework</groupId>-->
+            <!--<artifactId>axon-server-connector</artifactId>-->
+            <!--</exclusion>-->
             <!--</exclusions>-->
         </dependency>
         <dependency>
@@ -46,6 +46,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.zaxxer</groupId>
+                    <artifactId>HikariCP</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
         </dependency>
 
         <dependency>
