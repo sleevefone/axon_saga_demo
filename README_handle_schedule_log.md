@@ -28,6 +28,7 @@ public class Quickie {
     }
 }
 
+
 class MyThread extends Thread {
     static final Logger LOG = LoggerFactory.getLogger(MyThread.class);
 
