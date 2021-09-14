@@ -1,4 +1,4 @@
-package com.saga.example.axon;
+package com.saga.example.axon.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

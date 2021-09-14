@@ -1,6 +1,5 @@
-package com.saga.example.axon.customer.query;
+package com.saga.example.axon;
 
-import com.saga.example.axon.order.Order;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
